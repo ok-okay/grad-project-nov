@@ -27,7 +27,7 @@ public class EpisodeEntity {
     private String trailerUrl;
     private String posterUrl;
     
-    @OneToMany(mappedBy="episode", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy="episode")
     private Set<RoleEntity> roles;
     
     @ManyToOne

@@ -30,7 +30,7 @@ public class ContentEntity {
     private String trailerUrl;
     private String posterUrl;
     
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(
     		name="content_language",
     		joinColumns= @JoinColumn(name="content_id"),
@@ -39,7 +39,7 @@ public class ContentEntity {
     private Set<LanguageEntity> languages;
 
     
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(
     		name="content_genre",
     		joinColumns= @JoinColumn(name="content_id"),
@@ -47,15 +47,23 @@ public class ContentEntity {
     )
     private Set<GenreEntity> genres;
     
+    @ManyToMany
+    @JoinTable(
+    		name="content_collections",
+    		joinColumns= @JoinColumn(name="content_id"),
+    		inverseJoinColumns= @JoinColumn(name="collection_id")
+    )
+    private Set<CollectionEntity> collections;
+    
     @Enumerated(EnumType.STRING)
     private RatingEnum rating;
     
     @Enumerated(EnumType.STRING)
     private ContentTypeEnum contentType;
 
-    @OneToMany(mappedBy="content", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy="content")
     private Set<RoleEntity> roles;
     
-    @OneToMany(mappedBy="content", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy="content")
     private Set<SeasonEntity> seasons;
 }

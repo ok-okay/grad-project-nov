@@ -3,7 +3,6 @@ package com.example.gradprojectnov.model;
 import java.util.Set;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -11,14 +10,15 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "genres")
-public class GenreEntity {
+@Table(name = "tags")
+public class CollectionEntity {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-	
+
 	private String name;
+	private Boolean display;
 	
-	@ManyToMany(mappedBy="genres")
-	private Set<ContentEntity> content;
+	@ManyToMany(mappedBy="collections")
+	private Set<ContentEntity> contents;
 }

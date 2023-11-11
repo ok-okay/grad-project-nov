@@ -19,6 +19,6 @@ public class LanguageEntity {
 	
 	private String name;
 	
-	@ManyToMany(mappedBy="languages", fetch = FetchType.EAGER)
+	@ManyToMany(mappedBy="languages")
 	private Set<ContentEntity> content;
 }

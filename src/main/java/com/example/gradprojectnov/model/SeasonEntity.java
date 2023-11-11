@@ -24,7 +24,7 @@ public class SeasonEntity {
     private String releaseDate;
     private String trailerUrl;
     
-    @OneToMany(mappedBy="season", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy="season")
     private Set<EpisodeEntity> episodes;
     
     @ManyToOne

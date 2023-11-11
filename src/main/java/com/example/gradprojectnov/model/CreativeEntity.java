@@ -25,6 +25,6 @@ public class CreativeEntity {
 	@Enumerated(EnumType.STRING)
 	private CreativeTypeEnum creativeType;
 	
-	@OneToMany(mappedBy="creatives", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="creatives")
 	private Set<RoleEntity> roles;
 }
