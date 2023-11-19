@@ -1,28 +1,31 @@
 package com.example.gradprojectnov.model;
 
-import java.util.Set;
-
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "seasons")
-public class SeasonEntity {
+@Table(name = "resources")
+public class ResourceEntity {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String releaseDate;
-    private int seasonNumber;
+	
+	private String link;
+    private String description;
+    private int duration;
+	
+    @Enumerated(EnumType.STRING)
+    private ResourceCategoryEnum resourceCategory;
     
-    @OneToMany(mappedBy="season")
-    private Set<EpisodeEntity> episodes;
+    @Enumerated(EnumType.STRING)
+    private ResourceDisplayEnum resourceDisplay;
     
     @ManyToOne
     @JoinColumn(name="content_id")

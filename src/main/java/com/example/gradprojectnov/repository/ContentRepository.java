@@ -1,5 +1,8 @@
 package com.example.gradprojectnov.repository;
 
-public class ContentRepository {
+import org.springframework.stereotype.Repository;
 
+@Repository
+public class ContentRepository {
+	
 }

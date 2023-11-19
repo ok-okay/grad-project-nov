@@ -23,14 +23,12 @@ public class EpisodeEntity {
     private String description;
     private String releaseDate;
     private int duration;
-    private String trailerUrl;
-    private String posterUrl;
-    
-    @OneToMany(mappedBy="episode")
-    private Set<RoleEntity> roles;
+    private int episodeNumber;
     
     @ManyToOne
     @JoinColumn(name="season_id")
     private SeasonEntity season;
-
+    
+    @OneToMany(mappedBy="episode")
+    private Set<RoleEntity> roles;
 }

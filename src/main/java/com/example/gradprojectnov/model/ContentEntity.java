@@ -26,8 +26,6 @@ public class ContentEntity {
     private String releaseDate;
     private int duration;
     private String logoUrl;
-    private String trailerUrl;
-    private String posterUrl;
     
     @ManyToMany
     @JoinTable(
@@ -65,4 +63,7 @@ public class ContentEntity {
     
     @OneToMany(mappedBy="content")
     private Set<SeasonEntity> seasons;
+    
+    @OneToMany(mappedBy="content")
+    private Set<ResourceEntity> resources;
 }
