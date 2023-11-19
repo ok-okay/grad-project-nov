@@ -34,4 +34,8 @@ public class RoleEntity {
 	@ManyToOne
 	@JoinColumn(name="episode_id")
 	private EpisodeEntity episode;
+
+	public Long getId() {
+		return id;
+	}
 }

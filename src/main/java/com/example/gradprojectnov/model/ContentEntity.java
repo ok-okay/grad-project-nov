@@ -66,4 +66,60 @@ public class ContentEntity {
     
     @OneToMany(mappedBy="content")
     private Set<ResourceEntity> resources;
+
+	public Long getId() {
+		return id;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public String getReleaseDate() {
+		return releaseDate;
+	}
+
+	public int getDuration() {
+		return duration;
+	}
+
+	public String getLogoUrl() {
+		return logoUrl;
+	}
+
+	public Set<LanguageEntity> getLanguages() {
+		return languages;
+	}
+
+	public Set<GenreEntity> getGenres() {
+		return genres;
+	}
+
+	public Set<CollectionEntity> getCollections() {
+		return collections;
+	}
+
+	public RatingEnum getRating() {
+		return rating;
+	}
+
+	public ContentTypeEnum getContentType() {
+		return contentType;
+	}
+
+	public Set<RoleEntity> getRoles() {
+		return roles;
+	}
+
+	public Set<SeasonEntity> getSeasons() {
+		return seasons;
+	}
+
+	public Set<ResourceEntity> getResources() {
+		return resources;
+	}
 }

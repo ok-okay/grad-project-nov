@@ -20,4 +20,16 @@ public class LanguageEntity {
 	
 	@ManyToMany(mappedBy="languages")
 	private Set<ContentEntity> content;
+
+	public Long getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public Set<ContentEntity> getContent() {
+		return content;
+	}
 }

@@ -27,4 +27,8 @@ public class SeasonEntity {
     @ManyToOne
     @JoinColumn(name="content_id")
     private ContentEntity content;
+
+	public Long getId() {
+		return id;
+	}
 }

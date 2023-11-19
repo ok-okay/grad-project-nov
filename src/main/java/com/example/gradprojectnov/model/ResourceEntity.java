@@ -30,4 +30,32 @@ public class ResourceEntity {
     @ManyToOne
     @JoinColumn(name="content_id")
     private ContentEntity content;
+
+	public Long getId() {
+		return id;
+	}
+
+	public String getLink() {
+		return link;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public int getDuration() {
+		return duration;
+	}
+
+	public ResourceCategoryEnum getResourceCategory() {
+		return resourceCategory;
+	}
+
+	public ResourceDisplayEnum getResourceDisplay() {
+		return resourceDisplay;
+	}
+
+	public ContentEntity getContent() {
+		return content;
+	}
 }

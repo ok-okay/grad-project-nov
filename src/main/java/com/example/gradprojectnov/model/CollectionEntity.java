@@ -21,4 +21,20 @@ public class CollectionEntity {
 	
 	@ManyToMany(mappedBy="collections")
 	private Set<ContentEntity> contents;
+
+	public Long getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public Boolean getDisplay() {
+		return display;
+	}
+
+	public Set<ContentEntity> getContents() {
+		return contents;
+	}
 }

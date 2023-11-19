@@ -20,4 +20,8 @@ public class GenreEntity {
 	
 	@ManyToMany(mappedBy="genres")
 	private Set<ContentEntity> content;
+
+	public Long getId() {
+		return id;
+	}
 }
