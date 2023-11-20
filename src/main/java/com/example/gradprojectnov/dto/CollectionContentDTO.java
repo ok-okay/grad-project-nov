@@ -6,6 +6,7 @@ public class CollectionContentDTO {
 	private Long id;
 	private int releaseYear;
 	private int duration;
+	private int seasons;
 	private String rating;
 	private String description;
 	private Set<String> languages;
@@ -58,5 +59,11 @@ public class CollectionContentDTO {
 	}
 	public void setRating(String rating) {
 		this.rating = rating;
+	}
+	public int getSeasons() {
+		return seasons;
+	}
+	public void setSeasons(int seasons) {
+		this.seasons = seasons;
 	}
 }

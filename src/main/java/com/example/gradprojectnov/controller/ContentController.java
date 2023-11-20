@@ -1,5 +1,6 @@
 package com.example.gradprojectnov.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.gradprojectnov.Service.ContentService;
 import com.example.gradprojectnov.dto.CollectionContentDTO;
+import com.example.gradprojectnov.exceptions.InvalidContentTypeException;
 
 @RestController
 @RequestMapping("/v1")
@@ -25,8 +27,21 @@ public class ContentController {
 	}
 	
 	@GetMapping("/{contentType}")
-	public ResponseEntity<Map<String, List<CollectionContentDTO>>> getContentsFromType (@PathVariable String contentType){
-		Map<String, List<CollectionContentDTO>> collectionContentMap = contentService.getContentsFromType(contentType);
-		return new ResponseEntity<>(collectionContentMap, HttpStatus.OK);
+	public ResponseEntity<?> getContentsFromType (@PathVariable String contentType){
+		try {
+			Map<String, List<CollectionContentDTO>> collectionContentMap = contentService.getContentsFromType(contentType);			
+			return new ResponseEntity<>(collectionContentMap, HttpStatus.OK);
+		} catch(InvalidContentTypeException e) {
+			HashMap<String, String> err = new HashMap<String, String>();
+			err.put("message", "Invalid user input");
+			err.put("error", e.getMessage());
+			return new ResponseEntity<>(err, HttpStatus.BAD_REQUEST);
+		} catch(Exception e) {
+			HashMap<String, String> err = new HashMap<String, String>();
+			err.put("message", "Server down, please try again later");
+			err.put("error", e.getMessage());
+			return new ResponseEntity<>(err, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
 	}
 }

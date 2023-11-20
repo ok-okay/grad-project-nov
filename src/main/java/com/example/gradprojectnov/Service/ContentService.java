@@ -14,6 +14,7 @@ import com.example.gradprojectnov.dto.CollectionContentDTO;
 import com.example.gradprojectnov.dto.ContentDTO;
 import com.example.gradprojectnov.dto.DTOMapper;
 import com.example.gradprojectnov.dto.ResourceDTO;
+import com.example.gradprojectnov.exceptions.InvalidContentTypeException;
 import com.example.gradprojectnov.model.CollectionEntity;
 import com.example.gradprojectnov.model.ContentEntity;
 import com.example.gradprojectnov.model.ContentTypeEnum;
@@ -35,6 +36,9 @@ public class ContentService {
 	}
 	
 	public Map<String, List<CollectionContentDTO>> getContentsFromType(String contentType) {
+		if(!isValidContentType(contentType)) {
+			throw new InvalidContentTypeException("Invalid contentType: " + contentType);
+		}
 		ContentTypeEnum contentTypeEnum = ContentTypeEnum.valueOf(contentType.toUpperCase());
 		List<ContentEntity> contentEntityList = contentRepo.findByContentType(contentTypeEnum);
 
@@ -61,4 +65,14 @@ public class ContentService {
 		}
 		return collectionContentMap;
 	}
+	
+	
+    private boolean isValidContentType(String contentType) {
+        for (ContentTypeEnum validType : ContentTypeEnum.values()) {
+            if (validType.name().equalsIgnoreCase(contentType)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -69,8 +69,11 @@ public class DTOMapper {
 		CollectionContentDTO collectionContentDTO = new CollectionContentDTO();
 		collectionContentDTO.setId(contentDTO.getId());
 		collectionContentDTO.setReleaseYear(Integer.parseInt(contentDTO.getReleaseDate().substring(0, 4)));
-		collectionContentDTO.setDescription(contentDTO.getDescription());
+		collectionContentDTO.setDuration(contentDTO.getDuration());
+		collectionContentDTO.setSeasons(contentDTO.getSeasonIds().size());
 		collectionContentDTO.setRating(contentDTO.getRating());
+		collectionContentDTO.setDescription(contentDTO.getDescription());
+		
 		
 		Set<LanguageDTO> languageDTOSet = new HashSet<LanguageDTO>();
 		Set<LanguageEntity> languageEntitySet = contentEntity.getLanguages();
