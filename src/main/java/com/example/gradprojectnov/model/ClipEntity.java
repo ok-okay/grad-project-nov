@@ -11,8 +11,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "resources")
-public class ResourceEntity {
+@Table(name = "clips")
+public class ClipEntity {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,10 +22,7 @@ public class ResourceEntity {
     private int duration;
 	
     @Enumerated(EnumType.STRING)
-    private ResourceCategoryEnum resourceCategory;
-    
-    @Enumerated(EnumType.STRING)
-    private ResourceDisplayEnum resourceDisplay;
+    private ClipTypeEnum clipType;
     
     @ManyToOne
     @JoinColumn(name="content_id")
@@ -47,12 +44,8 @@ public class ResourceEntity {
 		return duration;
 	}
 
-	public ResourceCategoryEnum getResourceCategory() {
-		return resourceCategory;
-	}
-
-	public ResourceDisplayEnum getResourceDisplay() {
-		return resourceDisplay;
+	public ClipTypeEnum getClipType() {
+		return clipType;
 	}
 
 	public ContentEntity getContent() {

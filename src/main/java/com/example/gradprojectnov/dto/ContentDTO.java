@@ -9,6 +9,8 @@ public class ContentDTO {
     private String releaseDate;
     private int duration;
     private String logoUrl;
+    private String thumbnailNormal;
+    private String thumbnailHover;
     private Set<Long> languageIds;
     private Set<Long> genreIds;
     private Set<Long> collectionIds;
@@ -16,7 +18,7 @@ public class ContentDTO {
     private String contentType;
     private Set<Long> roleIds;
     private Set<Long> seasonIds;
-    private Set<Long> resourceIds;
+    private Set<Long> clipIds;
 	public Long getId() {
 		return id;
 	}
@@ -95,10 +97,22 @@ public class ContentDTO {
 	public void setSeasonIds(Set<Long> seasonIds) {
 		this.seasonIds = seasonIds;
 	}
-	public Set<Long> getResourceIds() {
-		return resourceIds;
+	public Set<Long> getClipIds() {
+		return clipIds;
 	}
-	public void setResourceIds(Set<Long> resourceIds) {
-		this.resourceIds = resourceIds;
+	public void setClipIds(Set<Long> clipIds) {
+		this.clipIds = clipIds;
+	}
+	public String getThumbnailNormal() {
+		return thumbnailNormal;
+	}
+	public void setThumbnailNormal(String thumbnailNormal) {
+		this.thumbnailNormal = thumbnailNormal;
+	}
+	public String getThumbnailHover() {
+		return thumbnailHover;
+	}
+	public void setThumbnailHover(String thumbnailHover) {
+		this.thumbnailHover = thumbnailHover;
 	}
 }

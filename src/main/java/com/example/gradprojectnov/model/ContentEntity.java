@@ -26,6 +26,8 @@ public class ContentEntity {
     private String releaseDate;
     private int duration;
     private String logoUrl;
+    private String thumbnailNormal;
+    private String thumbnailHover;
     
     @ManyToMany
     @JoinTable(
@@ -65,7 +67,7 @@ public class ContentEntity {
     private Set<SeasonEntity> seasons;
     
     @OneToMany(mappedBy="content")
-    private Set<ResourceEntity> resources;
+    private Set<ClipEntity> clips;
 
 	public Long getId() {
 		return id;
@@ -119,7 +121,15 @@ public class ContentEntity {
 		return seasons;
 	}
 
-	public Set<ResourceEntity> getResources() {
-		return resources;
+	public Set<ClipEntity> getClips() {
+		return clips;
+	}
+
+	public String getThumbnailNormal() {
+		return thumbnailNormal;
+	}
+
+	public String getThumbnailHover() {
+		return thumbnailHover;
 	}
 }

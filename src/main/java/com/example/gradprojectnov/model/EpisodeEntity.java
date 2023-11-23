@@ -20,6 +20,7 @@ public class EpisodeEntity {
 	
 	private String title;
     private String description;
+    private String thumbnail;
     private String releaseDate;
     private int duration;
     private int episodeNumber;

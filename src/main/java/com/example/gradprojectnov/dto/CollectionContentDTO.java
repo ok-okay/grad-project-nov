@@ -4,31 +4,34 @@ import java.util.Set;
 
 public class CollectionContentDTO {
 	private Long id;
+	private String title;
 	private int releaseYear;
+	private String thumbnailNormal;
+	private String thumbnailHover;
+	private String contentType;
 	private int duration;
-	private int seasons;
 	private String rating;
 	private String description;
+	private String trailerUrl;
 	private Set<String> languages;
-	private String posterListNormal;
-	private String posterListHover;
+
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getPosterListNormal() {
-		return posterListNormal;
+	public String getThumbnailNormal() {
+		return thumbnailNormal;
 	}
-	public void setPosterListNormal(String posterListNormal) {
-		this.posterListNormal = posterListNormal;
+	public void setThumbnailNormal(String thumbnailNormal) {
+		this.thumbnailNormal = thumbnailNormal;
 	}
-	public String getPosterListHover() {
-		return posterListHover;
+	public String getThumbnailHover() {
+		return thumbnailHover;
 	}
-	public void setPosterListHover(String posterListHover) {
-		this.posterListHover = posterListHover;
+	public void setThumbnailHover(String thumbnailHover) {
+		this.thumbnailHover = thumbnailHover;
 	}
 	public int getReleaseYear() {
 		return releaseYear;
@@ -60,10 +63,22 @@ public class CollectionContentDTO {
 	public void setRating(String rating) {
 		this.rating = rating;
 	}
-	public int getSeasons() {
-		return seasons;
+	public String getContentType() {
+		return contentType;
 	}
-	public void setSeasons(int seasons) {
-		this.seasons = seasons;
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getTrailerUrl() {
+		return trailerUrl;
+	}
+	public void setTrailerUrl(String trailerUrl) {
+		this.trailerUrl = trailerUrl;
 	}
 }

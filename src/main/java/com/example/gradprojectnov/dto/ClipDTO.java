@@ -1,13 +1,13 @@
 package com.example.gradprojectnov.dto;
 
-public class ResourceDTO {
+public class ClipDTO {
 	private Long id;
     private String link;
     private String description;
     private int duration;
-    private String resourceCategory;
-    private String resourceDisplay;
+    private String clipType;
     private Long contentId;
+
 	public Long getId() {
 		return id;
 	}
@@ -32,17 +32,11 @@ public class ResourceDTO {
 	public void setDuration(int duration) {
 		this.duration = duration;
 	}
-	public String getResourceCategory() {
-		return resourceCategory;
+	public String getClipType() {
+		return clipType;
 	}
-	public void setResourceCategory(String resourceCategory) {
-		this.resourceCategory = resourceCategory;
-	}
-	public String getResourceDisplay() {
-		return resourceDisplay;
-	}
-	public void setResourceDisplay(String resourceDisplay) {
-		this.resourceDisplay = resourceDisplay;
+	public void setClipType(String clipType) {
+		this.clipType = clipType;
 	}
 	public Long getContentId() {
 		return contentId;

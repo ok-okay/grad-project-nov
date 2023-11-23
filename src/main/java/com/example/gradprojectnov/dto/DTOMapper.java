@@ -1,11 +1,8 @@
 package com.example.gradprojectnov.dto;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
@@ -14,7 +11,7 @@ import com.example.gradprojectnov.model.CollectionEntity;
 import com.example.gradprojectnov.model.ContentEntity;
 import com.example.gradprojectnov.model.GenreEntity;
 import com.example.gradprojectnov.model.LanguageEntity;
-import com.example.gradprojectnov.model.ResourceEntity;
+import com.example.gradprojectnov.model.ClipEntity;
 import com.example.gradprojectnov.model.RoleEntity;
 import com.example.gradprojectnov.model.SeasonEntity;
 
@@ -34,6 +31,8 @@ public class DTOMapper {
         contentDTO.setReleaseDate(contentEntity.getReleaseDate());
         contentDTO.setDuration(contentEntity.getDuration());
         contentDTO.setLogoUrl(contentEntity.getLogoUrl());
+        contentDTO.setThumbnailNormal(contentEntity.getThumbnailNormal());
+        contentDTO.setThumbnailHover(contentEntity.getThumbnailHover());
         contentDTO.setLanguageIds(mapEntitiesToIds(contentEntity.getLanguages(), LanguageEntity::getId));
         contentDTO.setGenreIds(mapEntitiesToIds(contentEntity.getGenres(), GenreEntity::getId));
         contentDTO.setCollectionIds(mapEntitiesToIds(contentEntity.getCollections(), CollectionEntity::getId));
@@ -41,7 +40,7 @@ public class DTOMapper {
         contentDTO.setContentType(contentEntity.getContentType().toString());
         contentDTO.setRoleIds(mapEntitiesToIds(contentEntity.getRoles(), RoleEntity::getId));
         contentDTO.setSeasonIds(mapEntitiesToIds(contentEntity.getSeasons(), SeasonEntity::getId));
-        contentDTO.setResourceIds(mapEntitiesToIds(contentEntity.getResources(), ResourceEntity::getId));
+        contentDTO.setClipIds(mapEntitiesToIds(contentEntity.getClips(), ClipEntity::getId));
 		return contentDTO;
 	}
 	
@@ -51,58 +50,52 @@ public class DTOMapper {
 		return languageDTO;
 	}
 	
-	public ResourceDTO resourceDTOMapper(ResourceEntity resourceEntity) {
-		ResourceDTO resourceDTO = new ResourceDTO();
-		resourceDTO.setId(resourceEntity.getId());
-		resourceDTO.setLink(resourceEntity.getLink());
-		resourceDTO.setDescription(resourceEntity.getDescription());
-		resourceDTO.setDuration(resourceEntity.getDuration());
-		resourceDTO.setResourceCategory(resourceEntity.getResourceCategory().name());
-		resourceDTO.setResourceDisplay(resourceEntity.getResourceDisplay().name());
-		resourceDTO.setContentId(resourceEntity.getContent().getId());
+	public ClipDTO clipDTOMapper(ClipEntity clipEntity) {
+		ClipDTO clipDTO = new ClipDTO();
+		clipDTO.setId(clipEntity.getId());
+		clipDTO.setLink(clipEntity.getLink());
+		clipDTO.setDescription(clipEntity.getDescription());
+		clipDTO.setDuration(clipEntity.getDuration());
+		clipDTO.setClipType(clipEntity.getClipType().name());
+		clipDTO.setContentId(clipEntity.getContent().getId());
 		
-		return resourceDTO;
+		return clipDTO;
 	}
 	
 	public CollectionContentDTO collectionContentMapper(ContentEntity contentEntity) {
 		ContentDTO contentDTO = contentDTOMapper(contentEntity);
 		CollectionContentDTO collectionContentDTO = new CollectionContentDTO();
+		
 		collectionContentDTO.setId(contentDTO.getId());
+		collectionContentDTO.setTitle(contentDTO.getTitle());
 		collectionContentDTO.setReleaseYear(Integer.parseInt(contentDTO.getReleaseDate().substring(0, 4)));
-		collectionContentDTO.setDuration(contentDTO.getDuration());
-		collectionContentDTO.setSeasons(contentDTO.getSeasonIds().size());
+		collectionContentDTO.setContentType(contentDTO.getContentType());
+		
+		if(collectionContentDTO.getContentType().equals("MOVIES")) {
+			collectionContentDTO.setDuration(contentDTO.getDuration());			
+		} else if (collectionContentDTO.getContentType().equals("SERIES")) {
+			collectionContentDTO.setDuration(contentDTO.getSeasonIds().size());
+		}
+		
 		collectionContentDTO.setRating(contentDTO.getRating());
 		collectionContentDTO.setDescription(contentDTO.getDescription());
-		
-		
-		Set<LanguageDTO> languageDTOSet = new HashSet<LanguageDTO>();
-		Set<LanguageEntity> languageEntitySet = contentEntity.getLanguages();
-		for(LanguageEntity languageEntity : languageEntitySet) {
-			languageDTOSet.add(languageDTOMapper(languageEntity));
-		}
+		collectionContentDTO.setThumbnailNormal(contentDTO.getThumbnailNormal());
+		collectionContentDTO.setThumbnailHover(contentDTO.getThumbnailHover());
 		
 		Set<String> languageSet = new HashSet<String>();
-		for(LanguageDTO languageDTO : languageDTOSet) {
-			languageSet.add(languageDTO.getName());
+		Set<LanguageEntity> languageEntitySet = contentEntity.getLanguages();
+		for(LanguageEntity languageEntity : languageEntitySet) {
+			languageSet.add(languageDTOMapper(languageEntity).getName());
 		}
 		collectionContentDTO.setLanguages(languageSet);
-		
-		Set<ResourceDTO> resourceDTOSet = new HashSet<ResourceDTO>();
-		Set<ResourceEntity> resourceEntitySet = contentEntity.getResources();
-		for(ResourceEntity resourceEntity : resourceEntitySet) {
-			resourceDTOSet.add(resourceDTOMapper(resourceEntity));
-		}
 
-		for(ResourceDTO resourceDTO : resourceDTOSet) {
-			String resourceCategory = resourceDTO.getResourceCategory();
-			if(resourceCategory.equals("POSTER")) {
-				String resourceDisplay = resourceDTO.getResourceDisplay();
-				if(resourceDisplay.equals("LIST_VIEW_HOVER")) {
-					collectionContentDTO.setPosterListHover(resourceDTO.getLink());
-				}
-				else if(resourceDisplay.equals("LIST_VIEW_NORMAL")) {
-					collectionContentDTO.setPosterListNormal(resourceDTO.getLink());
-				}
+		Set<ClipEntity> clipEntitySet = contentEntity.getClips();
+		for(ClipEntity clipEntity : clipEntitySet) {
+			ClipDTO clipDTO = clipDTOMapper(clipEntity);
+			String clipType = clipDTO.getClipType();
+			if(clipType.equals("TRAILER_LATEST")) {
+				collectionContentDTO.setTrailerUrl(clipDTO.getLink());
+				break;
 			}
 		}
 		
