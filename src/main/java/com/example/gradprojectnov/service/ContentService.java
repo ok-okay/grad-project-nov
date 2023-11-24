@@ -172,9 +172,16 @@ public class ContentService {
 		return contentFromId;
 	}
 	
-	public void getEpisodeFromEpisodeNumber(long contentId, int seasonNumber) {
-		System.out.println(contentId);
-		System.out.println(seasonNumber);
+	public List<EpisodeDTO> getEpisodesFromSeasonNumber(long contentId, int seasonNumber) {
+		SeasonEntity seasonEntity = seasonRepo.findByContentIdAndSeasonNumber(contentId, seasonNumber).get();
+		Set<EpisodeEntity> episodeEntitySet = seasonEntity.getEpisodes();
+		List<EpisodeDTO> episodes = new ArrayList<>();
+		for(EpisodeEntity episodeEntity : episodeEntitySet) {
+			EpisodeDTO episodeDTO = dtoMapper.episodeDTOMapper(episodeEntity);
+			episodes.add(episodeDTO);
+		}
+		Collections.sort(episodes, Comparator.comparingLong(EpisodeDTO::getEpisodeNumber));
+		return episodes;
 	}
 	
 }

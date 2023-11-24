@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.gradprojectnov.dto.CollectionContentDTO;
+import com.example.gradprojectnov.dto.EpisodeDTO;
 import com.example.gradprojectnov.exceptions.InvalidContentTypeException;
 import com.example.gradprojectnov.service.ContentService;
 
@@ -72,14 +73,14 @@ public class ContentController {
 		}
 	}
 	
-	@GetMapping("/{contentId}/{episodeNumber}")
-	public ResponseEntity<?> getEpisodeFromEpisodeNumber(
+	@GetMapping("/{contentId}/{seasonNumber}")
+	public ResponseEntity<?> getEpisodesFromSeasonNumber(
 				@PathVariable long contentId,
 				@PathVariable int seasonNumber
 			){
 		try {
-			contentService.getEpisodeFromEpisodeNumber(contentId, seasonNumber);
-			return new ResponseEntity<>("Hello world", HttpStatus.OK);			
+			List<EpisodeDTO> episodes = contentService.getEpisodesFromSeasonNumber(contentId, seasonNumber);
+			return new ResponseEntity<>(episodes, HttpStatus.OK);		
 		}  catch(InvalidContentTypeException e) {
 			HashMap<String, String> err = new HashMap<String, String>();
 			err.put("message", "Invalid user input");
