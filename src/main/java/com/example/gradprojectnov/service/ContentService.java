@@ -145,7 +145,7 @@ public class ContentService {
 			for(EpisodeEntity episodeEntity : episodeEntitySet) {
 				episodesList.add(dtoMapper.episodeDTOMapper(episodeEntity));
 			}
-			Collections.sort(episodesList, Comparator.comparingLong(EpisodeDTO::getId));
+			Collections.sort(episodesList, Comparator.comparingInt(EpisodeDTO::getEpisodeNumber));
 			episodes.put("Season 1", episodesList);
 			contentFromId.put("episodes", episodes);
 		}
