@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -11,7 +12,6 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.gradprojectnov.dto.CollectionContentDTO;
 import com.example.gradprojectnov.dto.ContentDTO;
 import com.example.gradprojectnov.dto.CreativeDTO;
 import com.example.gradprojectnov.dto.DTOMapper;
@@ -60,14 +60,14 @@ public class ContentService {
         return false;
     }
 	
-	public Map<String, List<CollectionContentDTO>> getContentsFromType(String contentType) {
+	public Map<String, List<Map<String, Object>>> getContentsFromType(String contentType) {
 		if(!isValidContentType(contentType)) {
 			throw new InvalidContentTypeException("Invalid contentType: " + contentType);
 		}
 		ContentTypeEnum contentTypeEnum = ContentTypeEnum.valueOf(contentType.toUpperCase());
 		List<ContentEntity> contentEntityList = contentRepo.findByContentType(contentTypeEnum);
 
-		Map<String, List<CollectionContentDTO>> collectionContentMap = new HashMap<String, List<CollectionContentDTO>>();
+		Map<String, List<Map<String, Object>>> collectionContentMap = new HashMap<>();
 		
 		for(int i = 0; i<contentEntityList.size(); i++) {
 			ContentEntity contentEntity = contentEntityList.get(i);
@@ -76,14 +76,45 @@ public class ContentService {
 				Boolean display = collectionEntity.getDisplay();
 				if(display) {
 					String collectionName = collectionEntity.getName();
+					ContentDTO contentDTO = dtoMapper.contentDTOMapper(contentEntity);
+					Map<String, Object> collectionContent = new HashMap<>();
+					
+					collectionContent.put("id", contentDTO.getId());
+					collectionContent.put("title", contentDTO.getTitle());
+					collectionContent.put("description", contentDTO.getDescription());
+					collectionContent.put("releaseDate", contentDTO.getReleaseDate());
+					collectionContent.put("thumbnailNormal", contentDTO.getThumbnailNormal());
+					collectionContent.put("thumbnailHover", contentDTO.getThumbnailHover());
+					collectionContent.put("contentType", contentDTO.getContentType());
+					collectionContent.put("duration", contentDTO.getDuration());
+					collectionContent.put("rating", contentDTO.getRating());
+					
+					List<LanguageDTO> languageDTOList = new ArrayList<>();
+					Set<LanguageEntity> languageEntitySet = contentEntity.getLanguages();
+					for(LanguageEntity languageEntity : languageEntitySet) {
+						languageDTOList.add(dtoMapper.languageDTOMapper(languageEntity));
+					}
+					Collections.sort(languageDTOList, Comparator.comparingLong(LanguageDTO::getId));
+					collectionContent.put("languages", languageDTOList);
+					
+					Set<ClipEntity> clipEntitySet = contentEntity.getClips();
+					for(ClipEntity clipEntity : clipEntitySet) {
+						ClipDTO clipDTO = dtoMapper.clipDTOMapper(clipEntity);
+						String clipType = clipDTO.getClipType();
+						if(clipType.equals("TRAILER_LATEST")) {
+							collectionContent.put("trailerUrl", clipDTO.getLink());
+							break;
+						}
+					}
+					
 					if(collectionContentMap.containsKey(collectionName)) {
-						List<CollectionContentDTO> collectionContentDTOList = collectionContentMap.get(collectionName);
-						collectionContentDTOList.add(dtoMapper.collectionContentMapper(contentEntity));
-						collectionContentMap.put(collectionName, collectionContentDTOList);
+						List<Map<String, Object>> collectionContentList = collectionContentMap.get(collectionName);
+						collectionContentList.add(collectionContent);
+						collectionContentMap.put(collectionName, collectionContentList);
 					} else {
-						List<CollectionContentDTO> collectionContentDTOList = new ArrayList<CollectionContentDTO>();
-						collectionContentDTOList.add(dtoMapper.collectionContentMapper(contentEntity));
-						collectionContentMap.put(collectionName, collectionContentDTOList);
+						List<Map<String, Object>> collectionContentList = new ArrayList<>();
+						collectionContentList.add(collectionContent);
+						collectionContentMap.put(collectionName, collectionContentList);
 					}
 				}
 			}

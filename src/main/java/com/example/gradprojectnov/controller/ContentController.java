@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.gradprojectnov.dto.CollectionContentDTO;
 import com.example.gradprojectnov.dto.EpisodeDTO;
 import com.example.gradprojectnov.exceptions.InvalidContentTypeException;
 import com.example.gradprojectnov.service.ContentService;
@@ -31,7 +30,7 @@ public class ContentController {
 	@GetMapping("/{contentType}")
 	public ResponseEntity<?> getContentsFromType (@PathVariable String contentType){
 		try {
-			Map<String, List<CollectionContentDTO>> collectionContentMap = contentService.getContentsFromType(contentType);			
+			Map<String, List<Map<String, Object>>> collectionContentMap = contentService.getContentsFromType(contentType);			
 			return new ResponseEntity<>(collectionContentMap, HttpStatus.OK);
 		} catch(InvalidContentTypeException e) {
 			HashMap<String, String> err = new HashMap<String, String>();

@@ -102,43 +102,4 @@ public class DTOMapper {
 		return creativeDTO;
 	}
 	
-	public CollectionContentDTO collectionContentMapper(ContentEntity contentEntity) {
-		ContentDTO contentDTO = contentDTOMapper(contentEntity);
-		CollectionContentDTO collectionContentDTO = new CollectionContentDTO();
-		
-		collectionContentDTO.setId(contentDTO.getId());
-		collectionContentDTO.setTitle(contentDTO.getTitle());
-		collectionContentDTO.setReleaseYear(Integer.parseInt(contentDTO.getReleaseDate().substring(0, 4)));
-		collectionContentDTO.setContentType(contentDTO.getContentType());
-		
-		if(collectionContentDTO.getContentType().equals("MOVIES")) {
-			collectionContentDTO.setDuration(contentDTO.getDuration());			
-		} else if (collectionContentDTO.getContentType().equals("SERIES")) {
-			collectionContentDTO.setDuration(contentDTO.getSeasonIds().size());
-		}
-		
-		collectionContentDTO.setRating(contentDTO.getRating());
-		collectionContentDTO.setDescription(contentDTO.getDescription());
-		collectionContentDTO.setThumbnailNormal(contentDTO.getThumbnailNormal());
-		collectionContentDTO.setThumbnailHover(contentDTO.getThumbnailHover());
-		
-		Set<String> languageSet = new HashSet<String>();
-		Set<LanguageEntity> languageEntitySet = contentEntity.getLanguages();
-		for(LanguageEntity languageEntity : languageEntitySet) {
-			languageSet.add(languageDTOMapper(languageEntity).getName());
-		}
-		collectionContentDTO.setLanguages(languageSet);
-
-		Set<ClipEntity> clipEntitySet = contentEntity.getClips();
-		for(ClipEntity clipEntity : clipEntitySet) {
-			ClipDTO clipDTO = clipDTOMapper(clipEntity);
-			String clipType = clipDTO.getClipType();
-			if(clipType.equals("TRAILER_LATEST")) {
-				collectionContentDTO.setTrailerUrl(clipDTO.getLink());
-				break;
-			}
-		}
-		
-		return collectionContentDTO;
-	}
 }
