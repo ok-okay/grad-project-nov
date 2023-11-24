@@ -9,9 +9,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Index;
 
 @Entity
-@Table(name = "clips")
+@Table(name = "clips", indexes = {
+    @Index(name = "idx_clipType", columnList = "clipType"),
+    @Index(name = "idx_content_id", columnList = "content_id")
+})
 public class ClipEntity {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

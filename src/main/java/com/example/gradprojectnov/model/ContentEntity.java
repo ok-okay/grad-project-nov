@@ -8,6 +8,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
@@ -15,7 +16,9 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "content")
+@Table(name = "content", indexes = {
+	@Index(name = "idx_contentType", columnList = "contentType")
+})
 public class ContentEntity {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
