@@ -28,6 +28,7 @@ public class ContentEntity {
     private String logoUrl;
     private String thumbnailNormal;
     private String thumbnailHover;
+    private String posterUrl;
     
     @ManyToMany
     @JoinTable(
@@ -131,5 +132,9 @@ public class ContentEntity {
 
 	public String getThumbnailHover() {
 		return thumbnailHover;
+	}
+
+	public String getPosterUrl() {
+		return posterUrl;
 	}
 }

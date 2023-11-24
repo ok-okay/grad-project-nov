@@ -26,4 +26,24 @@ public class CreativeEntity {
 	
 	@OneToMany(mappedBy="creative")
 	private Set<RoleEntity> roles;
+
+	public Long getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public CreativeTypeEnum getCreativeType() {
+		return creativeType;
+	}
+
+	public Set<RoleEntity> getRoles() {
+		return roles;
+	}
 }

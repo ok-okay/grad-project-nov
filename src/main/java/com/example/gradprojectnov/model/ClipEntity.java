@@ -20,6 +20,7 @@ public class ClipEntity {
 	private String link;
     private String description;
     private int duration;
+    private String thumbnail;
 	
     @Enumerated(EnumType.STRING)
     private ClipTypeEnum clipType;
@@ -50,5 +51,9 @@ public class ClipEntity {
 
 	public ContentEntity getContent() {
 		return content;
+	}
+
+	public String getThumbnail() {
+		return thumbnail;
 	}
 }

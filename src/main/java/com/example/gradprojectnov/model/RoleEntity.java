@@ -38,4 +38,28 @@ public class RoleEntity {
 	public Long getId() {
 		return id;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public RoleTypeEnum getRoleType() {
+		return roleType;
+	}
+
+	public CreativeEntity getCreative() {
+		return creative;
+	}
+
+	public ContentEntity getContent() {
+		return content;
+	}
+
+	public EpisodeEntity getEpisode() {
+		return episode;
+	}
 }

@@ -31,4 +31,40 @@ public class EpisodeEntity {
     
     @OneToMany(mappedBy="episode")
     private Set<RoleEntity> roles;
+
+	public Long getId() {
+		return id;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public String getThumbnail() {
+		return thumbnail;
+	}
+
+	public String getReleaseDate() {
+		return releaseDate;
+	}
+
+	public int getDuration() {
+		return duration;
+	}
+
+	public int getEpisodeNumber() {
+		return episodeNumber;
+	}
+
+	public SeasonEntity getSeason() {
+		return season;
+	}
+
+	public Set<RoleEntity> getRoles() {
+		return roles;
+	}
 }

@@ -5,9 +5,7 @@ public class RoleDTO {
 	private String name;
 	private String description;
 	private String roleType;
-	private Long creativeId;
-	private Long contentId;
-	private Long episodeId;
+
 	public Long getId() {
 		return id;
 	}
@@ -31,23 +29,5 @@ public class RoleDTO {
 	}
 	public void setRoleType(String roleType) {
 		this.roleType = roleType;
-	}
-	public Long getCreativeId() {
-		return creativeId;
-	}
-	public void setCreativeId(Long creativeId) {
-		this.creativeId = creativeId;
-	}
-	public Long getContentId() {
-		return contentId;
-	}
-	public void setContentId(Long contentId) {
-		this.contentId = contentId;
-	}
-	public Long getEpisodeId() {
-		return episodeId;
-	}
-	public void setEpisodeId(Long episodeId) {
-		this.episodeId = episodeId;
 	}
 }

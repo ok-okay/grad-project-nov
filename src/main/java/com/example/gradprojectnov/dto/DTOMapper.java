@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 
 import com.example.gradprojectnov.model.CollectionEntity;
 import com.example.gradprojectnov.model.ContentEntity;
+import com.example.gradprojectnov.model.CreativeEntity;
+import com.example.gradprojectnov.model.EpisodeEntity;
 import com.example.gradprojectnov.model.GenreEntity;
 import com.example.gradprojectnov.model.LanguageEntity;
 import com.example.gradprojectnov.model.ClipEntity;
@@ -33,6 +35,7 @@ public class DTOMapper {
         contentDTO.setLogoUrl(contentEntity.getLogoUrl());
         contentDTO.setThumbnailNormal(contentEntity.getThumbnailNormal());
         contentDTO.setThumbnailHover(contentEntity.getThumbnailHover());
+        contentDTO.setPosterUrl(contentEntity.getPosterUrl());
         contentDTO.setLanguageIds(mapEntitiesToIds(contentEntity.getLanguages(), LanguageEntity::getId));
         contentDTO.setGenreIds(mapEntitiesToIds(contentEntity.getGenres(), GenreEntity::getId));
         contentDTO.setCollectionIds(mapEntitiesToIds(contentEntity.getCollections(), CollectionEntity::getId));
@@ -46,8 +49,16 @@ public class DTOMapper {
 	
 	public LanguageDTO languageDTOMapper(LanguageEntity languageEntity) {
 		LanguageDTO languageDTO = new LanguageDTO();
+		languageDTO.setId(languageEntity.getId());
 		languageDTO.setName(languageEntity.getName());
 		return languageDTO;
+	}
+	
+	public GenreDTO genreDTOMapper(GenreEntity genreEntity) {
+		GenreDTO genreDTO = new GenreDTO();
+		genreDTO.setId(genreEntity.getId());
+		genreDTO.setName(genreEntity.getName());
+		return genreDTO;
 	}
 	
 	public ClipDTO clipDTOMapper(ClipEntity clipEntity) {
@@ -56,10 +67,39 @@ public class DTOMapper {
 		clipDTO.setLink(clipEntity.getLink());
 		clipDTO.setDescription(clipEntity.getDescription());
 		clipDTO.setDuration(clipEntity.getDuration());
+		clipDTO.setThumbnail(clipEntity.getThumbnail());
 		clipDTO.setClipType(clipEntity.getClipType().name());
-		clipDTO.setContentId(clipEntity.getContent().getId());
-		
 		return clipDTO;
+	}
+	
+	public EpisodeDTO episodeDTOMapper(EpisodeEntity episodeEntity) {
+		EpisodeDTO episodeDTO = new EpisodeDTO();
+		episodeDTO.setId(episodeEntity.getId());
+		episodeDTO.setTitle(episodeEntity.getTitle());
+		episodeDTO.setDescription(episodeEntity.getDescription());
+		episodeDTO.setThumbnail(episodeEntity.getThumbnail());
+		episodeDTO.setReleaseDate(episodeEntity.getReleaseDate());
+		episodeDTO.setDuration(episodeEntity.getDuration());
+		episodeDTO.setEpisodeNumber(episodeEntity.getEpisodeNumber());
+		return episodeDTO;
+	}
+	
+	public RoleDTO roleDTOMapper(RoleEntity roleEntity) {
+		RoleDTO roleDTO = new RoleDTO();
+		roleDTO.setId(roleEntity.getId());
+		roleDTO.setName(roleEntity.getName());
+		roleDTO.setDescription(roleEntity.getDescription());
+		roleDTO.setRoleType(roleEntity.getRoleType().name());
+		return roleDTO;
+	}
+	
+	public CreativeDTO creativeDTOMapper(CreativeEntity creativeEntity) {
+		CreativeDTO creativeDTO = new CreativeDTO();
+		creativeDTO.setId(creativeEntity.getId());
+		creativeDTO.setName(creativeEntity.getName());
+		creativeDTO.setDescription(creativeEntity.getDescription());
+		creativeDTO.setCreativeType(creativeEntity.getCreativeType().name());
+		return creativeDTO;
 	}
 	
 	public CollectionContentDTO collectionContentMapper(ContentEntity contentEntity) {

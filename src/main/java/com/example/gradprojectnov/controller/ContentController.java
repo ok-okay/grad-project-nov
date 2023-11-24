@@ -51,8 +51,8 @@ public class ContentController {
 				@PathVariable long contentId
 			){
 		try {
-			contentService.getContentFromId(contentId);
-			return new ResponseEntity<>("Hello world", HttpStatus.OK);			
+			Map<String, Object> contentFromId = contentService.getContentFromId(contentId);
+			return new ResponseEntity<>(contentFromId, HttpStatus.OK);			
 		}  catch(InvalidContentTypeException e) {
 			HashMap<String, String> err = new HashMap<String, String>();
 			err.put("message", "Invalid user input");

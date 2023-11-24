@@ -1,12 +1,9 @@
 package com.example.gradprojectnov.dto;
 
-import java.util.Set;
-
 public class SeasonDTO {
 	private Long id;
     private String releaseDate;
     private int seasonNumber;
-    private Long contentId;
 
     public Long getId() {
 		return id;
@@ -25,11 +22,5 @@ public class SeasonDTO {
 	}
 	public void setSeasonNumber(int seasonNumber) {
 		this.seasonNumber = seasonNumber;
-	}
-	public Long getContentId() {
-		return contentId;
-	}
-	public void setContentId(Long contentId) {
-		this.contentId = contentId;
 	}
 }

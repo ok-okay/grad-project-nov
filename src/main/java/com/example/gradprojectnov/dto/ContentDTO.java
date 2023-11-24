@@ -11,6 +11,7 @@ public class ContentDTO {
     private String logoUrl;
     private String thumbnailNormal;
     private String thumbnailHover;
+    private String posterUrl;
     private Set<Long> languageIds;
     private Set<Long> genreIds;
     private Set<Long> collectionIds;
@@ -114,5 +115,11 @@ public class ContentDTO {
 	}
 	public void setThumbnailHover(String thumbnailHover) {
 		this.thumbnailHover = thumbnailHover;
+	}
+	public String getPosterUrl() {
+		return posterUrl;
+	}
+	public void setPosterUrl(String posterUrl) {
+		this.posterUrl = posterUrl;
 	}
 }

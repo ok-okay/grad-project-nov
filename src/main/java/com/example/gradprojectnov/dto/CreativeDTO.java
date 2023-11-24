@@ -1,7 +1,5 @@
 package com.example.gradprojectnov.dto;
 
-import java.util.Set;
-
 public class CreativeDTO {
 	private Long id;
     private String name;

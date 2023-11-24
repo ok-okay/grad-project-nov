@@ -31,4 +31,20 @@ public class SeasonEntity {
 	public Long getId() {
 		return id;
 	}
+
+	public String getReleaseDate() {
+		return releaseDate;
+	}
+
+	public int getSeasonNumber() {
+		return seasonNumber;
+	}
+
+	public Set<EpisodeEntity> getEpisodes() {
+		return episodes;
+	}
+
+	public ContentEntity getContent() {
+		return content;
+	}
 }

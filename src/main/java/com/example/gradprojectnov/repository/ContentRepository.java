@@ -10,7 +10,7 @@ import com.example.gradprojectnov.model.ContentEntity;
 import com.example.gradprojectnov.model.ContentTypeEnum;
 
 @Repository
-public interface ContentRepository  extends JpaRepository<ContentEntity, Long>  {
+public interface ContentRepository extends JpaRepository<ContentEntity, Long>  {
 	List<ContentEntity> findByContentType(ContentTypeEnum contentTypeEnum);
 	Optional<ContentEntity> findById(Long id);
 }

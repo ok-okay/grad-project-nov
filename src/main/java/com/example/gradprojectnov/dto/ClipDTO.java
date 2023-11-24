@@ -5,8 +5,8 @@ public class ClipDTO {
     private String link;
     private String description;
     private int duration;
+    private String thumbnail;
     private String clipType;
-    private Long contentId;
 
 	public Long getId() {
 		return id;
@@ -38,10 +38,10 @@ public class ClipDTO {
 	public void setClipType(String clipType) {
 		this.clipType = clipType;
 	}
-	public Long getContentId() {
-		return contentId;
+	public String getThumbnail() {
+		return thumbnail;
 	}
-	public void setContentId(Long contentId) {
-		this.contentId = contentId;
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
 	}
 }

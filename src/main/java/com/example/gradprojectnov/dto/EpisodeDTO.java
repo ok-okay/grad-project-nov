@@ -1,15 +1,13 @@
 package com.example.gradprojectnov.dto;
 
-import java.util.Set;
-
 public class EpisodeDTO {
 	private Long id;
     private String title;
     private String description;
+    private String thumbnail;
     private String releaseDate;
     private int duration;
     private int episodeNumber;
-    private Long seasonId;
 
 	public Long getId() {
 		return id;
@@ -47,10 +45,10 @@ public class EpisodeDTO {
 	public void setEpisodeNumber(int episodeNumber) {
 		this.episodeNumber = episodeNumber;
 	}
-	public Long getSeasonId() {
-		return seasonId;
+	public String getThumbnail() {
+		return thumbnail;
 	}
-	public void setSeasonId(Long seasonId) {
-		this.seasonId = seasonId;
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
 	}
 }
