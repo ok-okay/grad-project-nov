@@ -31,6 +31,8 @@ import com.example.gradprojectnov.model.LanguageEntity;
 import com.example.gradprojectnov.model.RoleEntity;
 import com.example.gradprojectnov.model.SeasonEntity;
 import com.example.gradprojectnov.model.ClipEntity;
+import com.example.gradprojectnov.model.ClipTypeEnum;
+import com.example.gradprojectnov.repository.ClipRepository;
 import com.example.gradprojectnov.repository.ContentRepository;
 import com.example.gradprojectnov.repository.SeasonRepository;
 
@@ -38,16 +40,19 @@ import com.example.gradprojectnov.repository.SeasonRepository;
 public class ContentService {
 	private final ContentRepository contentRepo;
 	private final SeasonRepository seasonRepo;
+	private final ClipRepository clipRepo;
 	private final DTOMapper dtoMapper;
 	
 	@Autowired
 	public ContentService(
 			ContentRepository contentRepo,
 			SeasonRepository seasonRepo,
+			ClipRepository clipRepo,
 			DTOMapper dtoMapper
 		) {
 		this.contentRepo = contentRepo;
 		this.seasonRepo = seasonRepo;
+		this.clipRepo = clipRepo;
 		this.dtoMapper = dtoMapper;
 	}
 	
@@ -97,15 +102,9 @@ public class ContentService {
 					Collections.sort(languageDTOList, Comparator.comparingLong(LanguageDTO::getId));
 					collectionContent.put("languages", languageDTOList);
 					
-					Set<ClipEntity> clipEntitySet = contentEntity.getClips();
-					for(ClipEntity clipEntity : clipEntitySet) {
-						ClipDTO clipDTO = dtoMapper.clipDTOMapper(clipEntity);
-						String clipType = clipDTO.getClipType();
-						if(clipType.equals("TRAILER_LATEST")) {
-							collectionContent.put("trailerUrl", clipDTO.getLink());
-							break;
-						}
-					}
+					ClipEntity clipEntity = clipRepo.findByContentIdAndClipType(contentDTO.getId(), ClipTypeEnum.valueOf("TRAILER_LATEST")).get();
+					ClipDTO clipDTO = dtoMapper.clipDTOMapper(clipEntity);
+					collectionContent.put("trailer", clipDTO);
 					
 					if(collectionContentMap.containsKey(collectionName)) {
 						List<Map<String, Object>> collectionContentList = collectionContentMap.get(collectionName);
