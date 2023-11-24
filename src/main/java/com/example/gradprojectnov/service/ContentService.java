@@ -172,4 +172,9 @@ public class ContentService {
 		return contentFromId;
 	}
 	
+	public void getEpisodeFromEpisodeNumber(long contentId, int seasonNumber) {
+		System.out.println(contentId);
+		System.out.println(seasonNumber);
+	}
+	
 }

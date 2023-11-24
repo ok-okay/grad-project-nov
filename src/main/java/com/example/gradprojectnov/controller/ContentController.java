@@ -70,6 +70,32 @@ public class ContentController {
 			err.put("error", e.getMessage());
 			return new ResponseEntity<>(err, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-
+	}
+	
+	@GetMapping("/{contentId}/{episodeNumber}")
+	public ResponseEntity<?> getEpisodeFromEpisodeNumber(
+				@PathVariable long contentId,
+				@PathVariable int seasonNumber
+			){
+		try {
+			contentService.getEpisodeFromEpisodeNumber(contentId, seasonNumber);
+			return new ResponseEntity<>("Hello world", HttpStatus.OK);			
+		}  catch(InvalidContentTypeException e) {
+			HashMap<String, String> err = new HashMap<String, String>();
+			err.put("message", "Invalid user input");
+			err.put("error", e.getMessage());
+			return new ResponseEntity<>(err, HttpStatus.BAD_REQUEST);
+		} catch(NoSuchElementException e) {
+			HashMap<String, String> err = new HashMap<String, String>();
+			err.put("message", "Content not found");
+			err.put("error", e.getMessage());
+			return new ResponseEntity<>(err, HttpStatus.NOT_FOUND);
+		}
+		catch(Exception e) {
+			HashMap<String, String> err = new HashMap<String, String>();
+			err.put("message", "Server down, please try again later");
+			err.put("error", e.getMessage());
+			return new ResponseEntity<>(err, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 }
