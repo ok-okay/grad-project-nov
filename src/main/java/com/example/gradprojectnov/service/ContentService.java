@@ -75,7 +75,6 @@ public class ContentService {
 		
 		for(int i = 0; i<contentEntityList.size(); i++) {
 			ContentEntity contentEntity = contentEntityList.get(i);
-			
 			for(CollectionEntity collectionEntity : contentEntity.getCollections()) {
 				Boolean display = collectionEntity.getDisplay();
 				if(display) {

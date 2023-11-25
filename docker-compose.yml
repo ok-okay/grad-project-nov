@@ -1,0 +1,30 @@
+version: "3"
+services:
+  api_service:
+    build: .
+    restart: no
+    ports:
+      - 8080:8080
+    networks:
+      - springapimysql-net
+    environment:
+      - spring.datasource.url=jdbc:mysql://mysqldb:3306/gradproject?allowPublicKeyRetrieval=true
+    depends_on:
+      - mysqldb
+
+
+  mysqldb:
+    image: "mysql:8.0"
+    restart: no
+    ports:
+      - 3306:3306
+    networks:
+      - springapimysql-net
+    environment:
+      MYSQL_DATABASE: gradproject
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+      MYSQL_ROOT_PASSWORD: 81210584c1d736de671f44172141ab4bf3e954121eaf1d64ba14cbd88b7cccf9
+
+networks:
+  springapimysql-net:
