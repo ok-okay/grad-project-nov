@@ -1,8 +1,10 @@
 # grad-project-nov
 Postman link for APIs: https://www.postman.com/security-pilot-12595993/workspace/nextleap/collection/30687522-38bdecb4-4f8a-4262-961d-23c78ba4f8a4
 
+## Base url: http://3.7.45.52:8080
+
 ## getContentsFromType
-**http://15.206.178.60:8080/v1/series**
+**/v1/series**
 
 This API fetches the contents grouped according to their collection for the /home, /movies, /series routes in hotstar.
 The API endpoint is /v1/contentType
@@ -10,7 +12,7 @@ The API endpoint is /v1/contentType
 The allowed values for contentType are "series" and "movies" for now.﻿
 
 ## getContentFromIdentifiers
-**http://15.206.178.60:8080/v1/series/loki/2**
+**/v1/series/loki/2**
 
 This API fetches the content based on the contentId provided for the content page.
 
@@ -25,7 +27,7 @@ contentId is a long data type used to fetch the content from DB.
 The data is available for contentId values 1 and 2 for now.
 
 ## getEpisodesFromSeasonNumber
-**http://15.206.178.60:8080/v1/2/1**
+**/v1/2/1**
 
 This API fetches the episodes for a specific season of a content based on the contentId and seasonNumber provided.
 
